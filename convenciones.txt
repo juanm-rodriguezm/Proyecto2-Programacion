@@ -1,0 +1,12 @@
+*OBJETOS Y CLASES:
+
+Objeto de tipo Scanner: "inp"
+Nombres de clase deben ir con mayusculas.
+Métodos de clase con notación de camello, por ejemplo, "miMetodo()"
+______________________________________________________________________
+*LISTADO DE VARIABLES: 
+
+-
+-
+______________________________________________________________________
+*RELACIÓN DE CLASES:

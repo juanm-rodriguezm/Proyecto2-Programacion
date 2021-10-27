@@ -1,9 +1,22 @@
 package Estudiante;
+
+import java.util.Date;
+
+import Persona.Persona;
+
 /**
  * Clase con las funcionalidades básica de estudiantes
  */
-public class Estudiante 
+public class Estudiante extends Persona
 {
+    private String carrera;
+    private int semestre;
+    public Estudiante(String nombre, String apellido, int edad, Date creacion, String carrera, int semestre)
+    {
+        super(nombre, apellido, edad, creacion);
+        this.carrera = carrera;
+        this.semestre = semestre;
+    }
     public static void Menu()
     {
         System.out.println("+-------------------------------------+");
