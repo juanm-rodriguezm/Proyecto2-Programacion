@@ -9,14 +9,22 @@ import Persona.Persona;
  */
 public class Estudiante extends Persona
 {
-    private String carrera;
-    private int semestre;
-    public Estudiante(String nombre, String apellido, int edad, Date creacion, String carrera, int semestre)
+
+    /**
+     * Constructor único de la clase persona
+     * @param usuario
+     * @param edad
+     * @param creacion
+     * @param carrera
+     */
+    public Estudiante(String usuario, int edad, Date creacion, String carrera, int semestre, String contrasena)
     {
-        super(nombre, apellido, edad, creacion);
-        this.carrera = carrera;
-        this.semestre = semestre;
+        super(usuario, edad, creacion, contrasena);
+        super.tipo = 'e';
     }
+    /**
+     * Menú con las funciones a las que puede acceder un estudiante
+     */
     public static void Menu()
     {
         System.out.println("+-------------------------------------+");

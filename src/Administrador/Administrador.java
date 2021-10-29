@@ -1,9 +1,22 @@
 package Administrador;
+
+import java.util.Date;
+
+import Persona.Persona;
+
 /**
  * Clase de administrador para manejo del sistema
  */
-public class Administrador 
+public class Administrador extends Persona
 {
+    public Administrador(String usuario, int edad, Date creacion, String contrasena)
+    {
+        super(usuario, edad, creacion, contrasena);
+        super.tipo = 'a';
+    }
+    /** 
+     * Menu con las funcionalidades del administrador
+     */
     public static void Menu()
     {
         System.out.println("+-------------------------------------+");

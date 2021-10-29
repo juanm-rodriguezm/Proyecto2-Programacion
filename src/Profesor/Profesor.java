@@ -1,9 +1,29 @@
 package Profesor;
+
+import java.util.Date;
+
+import Persona.Persona;
+
 /**
  * Clase para el manejo y funciones del Profesor
  */
-public class Profesor 
+public class Profesor extends Persona
 {
+    /**
+     * Constructor único de un profesor
+     * @param usuario
+     * @param edad
+     * @param creacion
+     * @param contrasena
+     */
+    public Profesor(String usuario, int edad, Date creacion, String contrasena)
+    {
+        super(usuario, edad, creacion, contrasena);
+        super.tipo = 'p';
+    }
+    /**
+     * Menu de las funcionalidades del profesor
+     */
     public static void Menu()
     {
         System.out.println("+-------------------------------------+");
