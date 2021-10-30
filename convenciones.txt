@@ -1,12 +1,15 @@
 *OBJETOS Y CLASES:
 
-Objeto de tipo Scanner: "inp"
-Nombres de clase deben ir con mayusculas.
-Métodos de clase con notación de camello, por ejemplo, "miMetodo()"
-______________________________________________________________________
+-Objeto de tipo Scanner: "inp"
+-Nombres de clase deben ir con mayusculas.
+-Métodos de clase con notación de camello, por ejemplo, "miMetodo()"
+-Se definiran objetos nulos al inicio del programa para su manejo posterior.
+____________________________________________________________________________
 *LISTADO DE VARIABLES: 
-
 -
 -
-______________________________________________________________________
+-
+____________________________________________________________________________
 *RELACIÓN DE CLASES:
+- La clase persona es padre de las clases: Estudiante, Profesor y Admin
+- La lectura/Escritura de archivos se hace con la intermediacion de persona

@@ -16,10 +16,15 @@ public class Main
     {
         //_______________________ Declaración de variables _____________________________
         int opt = 0, opt2 = 0, ntipo = 0;
+        String usuario = " ", password = " ";
+        String planilla = "planillaU.obj";
         char tipo = ' ';
         //_______________________ Declaración de objetos _______________________________
         Scanner inp = new Scanner(System.in);
-        //Persona colaborador = null;
+        Persona colaborador = null;
+        Estudiante alumno = null;
+        Profesor maestro = null;
+        Administrador admin = null;
         // ______________________ Desarrollo general ___________________________________
         do
         {
@@ -32,6 +37,11 @@ public class Main
                 {
                     case 1:
                         System.out.println("Preparando ingreso de sesión...");
+                        System.out.println("\n\tDigite su usuario");
+                        usuario = inp.next();
+                        System.out.println("\tDigite su contraseña: ");
+                        password = inp.next();
+                        colaborador = Persona.leerEnArchivo(planilla, usuario);
                         switch(ntipo)
                         {
                             case 1:
