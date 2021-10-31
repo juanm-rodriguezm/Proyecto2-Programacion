@@ -9,6 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 //--------------------importaciones y librerías------------------
 import java.util.Date;
+import java.util.Scanner;
 
 /**
  * Clase que posee los atributos básicos de una persona natural
@@ -119,7 +120,7 @@ public class Persona implements Serializable
      * Lectura de archivo de usuario para cargar login
      * @param archivo
      * @param usuario
-     * @return Persona/null
+     * @return Persona leida  o null en caso no encontrado
      */
     public static Persona leerEnArchivo(String archivo, String usuario)
     {
@@ -127,8 +128,9 @@ public class Persona implements Serializable
         Persona adquirido = null;
         FileInputStream fos = null; 
         ObjectInputStream oos = null;
-        try
-        {
+        try 
+        {//En esta función cargamos las dos variables y generamos una bandera para entrar a un ciclo infinito 
+        //comparanado los archivos con el que nos acaban de dar con los que tenemos en los archivos
             fos = new FileInputStream(archivo);
             oos = new ObjectInputStream(fos);
             while(bandera)
@@ -142,25 +144,25 @@ public class Persona implements Serializable
             }
             oos.close();
         }
-        catch (EOFException eof)
+        catch (EOFException eof) //Excepción de lectura completa de archivo
         {
             System.out.println("Se ha finalizado la lectura del archivo");
         }
-        catch (ClassNotFoundException cnfe)
+        catch (ClassNotFoundException cnfe)  //Error en caso de clase inexistente o no encontrada
         {
             System.out.println("Ha ocurrido un problema con la definición de la clase");
         }
-        catch (FileNotFoundException fnfe)
+        catch (FileNotFoundException fnfe)  //Error con el archivo en ruta especificada
         {
             System.out.println("No se ha encontrado el archivo.");
         }
-        catch (IOException io)
+        catch (IOException io)  //Error con el flujo de entrada y salida
         {
             System.out.println("Error en el flujo del sistema");
         }
-        catch (Exception e)
+        catch (Exception e)  //Manejo de otras excepciones
         {
-            System.out.println("Mi error....");
+            System.out.println("Ha ocurrido una imprevisto: " + e.getMessage());
         }
         finally
         {
@@ -168,7 +170,82 @@ public class Persona implements Serializable
         }
         return adquirido;
     }
-
+    /**
+     * Lectura de archivo de usuario para cargar usuario tras validación de contraseña
+     * @param archivo
+     * @param usuario
+     * @param contrasena
+     * @return Persona validada o null si no es encontrado o contraseña incorrecta
+     */
+    public static Persona leerEnArchivo(String archivo, String usuario, String contrasena)
+    {
+        boolean bandera = true;
+        int con = 0;
+        Scanner inp = new Scanner(System.in);
+        Persona adquirido = null;
+        FileInputStream fos = null; 
+        ObjectInputStream oos = null;
+        try
+        {
+            fos = new FileInputStream(archivo);
+            oos = new ObjectInputStream(fos);
+            while(bandera)
+            {
+                adquirido = (Persona)oos.readObject();
+                if( adquirido.getUsuario().equals(usuario))
+                {
+                    oos.close();
+                    while(con<3)
+                    {
+                        if(adquirido.getContrasena().equals(contrasena))
+                        {
+                            bandera = !bandera;
+                            break;
+                        }
+                        System.out.println("Contraseña incorrecta...\nDigite nuevamente: ");
+                        contrasena = inp.next();
+                        con++;
+                    }
+                    inp.close();
+                    if(bandera)
+                    {
+                        return adquirido;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                    
+                }
+            }
+            oos.close();
+        }
+        catch (EOFException eof) //Excepción de lectura completa de archivo
+        {
+            System.out.println("Se ha finalizado la lectura del archivo");
+        }
+        catch (ClassNotFoundException cnfe)  //Error en caso de clase inexistente o no encontrada
+        {
+            System.out.println("Ha ocurrido un problema con la definición de la clase");
+        }
+        catch (FileNotFoundException fnfe)  //Error con el archivo en ruta especificada
+        {
+            System.out.println("No se ha encontrado el archivo.");
+        }
+        catch (IOException io)  //Error con el flujo de entrada y salida
+        {
+            System.out.println("Error en el flujo del sistema");
+        }
+        catch (Exception e)  //Manejo de otras excepciones
+        {
+            System.out.println("Ha ocurrido una imprevisto: " + e.getMessage());
+        }
+        finally
+        {
+            System.out.println("Lectura finalizada");
+        }
+        return adquirido;
+    }
     @Override
     public String toString() 
     {

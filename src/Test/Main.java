@@ -6,6 +6,8 @@ import Funcionalidades.FuncionPrograma;
 //______________________ Importación de Paquetes java __________________________________
 import java.util.Scanner;
 
+import javax.lang.model.util.ElementScanner14;
+
 import Administrador.Administrador;
 import Estudiante.Estudiante;
 //import java.util.Date;
@@ -17,7 +19,7 @@ public class Main
         //_______________________ Declaración de variables _____________________________
         int opt = 0, opt2 = 0, ntipo = 0;
         String usuario = " ", password = " ";
-        String planilla = "planillaU.obj";
+        String planilla = "planillaU.obj";  //Nombre del listado de personas
         char tipo = ' ';
         //_______________________ Declaración de objetos _______________________________
         Scanner inp = new Scanner(System.in);
@@ -30,6 +32,7 @@ public class Main
         {
             try
             {
+                FuncionPrograma.verficarCrearAdmin(planilla);
                 FuncionPrograma.Menu();
                 opt = inp.nextInt();
                 System.out.println(opt);
@@ -41,33 +44,59 @@ public class Main
                         usuario = inp.next();
                         System.out.println("\tDigite su contraseña: ");
                         password = inp.next();
-                        colaborador = Persona.leerEnArchivo(planilla, usuario);
-                        switch(ntipo)
+                        colaborador = Persona.leerEnArchivo(planilla, usuario,password);
+                        if(colaborador == null)
                         {
-                            case 1:
-                                Administrador.Menu();
-                                do
-                                {
-                                    //TODO: Opciones de menuAd:
-                                }while(opt2!=5);
-                                break;
-                            case 2:
-                                Profesor.Menu();
-                                do
-                                {
-                                    //TODO: Opciones de menuPr:
-                                }while(opt2!=6);
-                                break;
-                            case 3:
-                                Estudiante.Menu();
-                                do
-                                {
-                                    //TODO: Opciones de menuEs:
-                                }while(opt2!=7);
-                                break;
-                            default:
-                                System.out.println("Volviendo al menú");
-                                break;
+                            System.out.println("Volviendo al menu por fallo de login...");
+                        }
+                        else 
+                        {
+                            //-------Lectura del tipo de cuenta y claseficación---------------
+                            tipo = colaborador.getTipo();
+                            if(tipo == 'a')
+                            {
+                                ntipo = 1;
+                            }
+                            else if(tipo == 'p')
+                            {
+                                ntipo = 2;
+                            }
+                            else if(tipo == 'e')
+                            {
+                                ntipo = 3;
+                            }
+                            else
+                            {
+                                ntipo = 4;
+                            }
+                            //--------------------Manejo de menus de usuarios--------------------
+                            switch(ntipo)
+                            {
+                                case 1:
+                                    Administrador.Menu();
+                                    do
+                                    {
+                                        //TODO: Opciones de menuAd:
+                                    }while(opt2!=5);
+                                    break;
+                                case 2:
+                                    Profesor.Menu();
+                                    do
+                                    {
+                                        //TODO: Opciones de menuPr:
+                                    }while(opt2!=6);
+                                    break;
+                                case 3:
+                                    Estudiante.Menu();
+                                    do
+                                    {
+                                        //TODO: Opciones de menuEs:
+                                    }while(opt2!=7);
+                                    break;
+                                default:
+                                    System.out.println("Volviendo al menú, tipo invalido...");
+                                    break;
+                            }
                         }
                         break;
                     case 2:
