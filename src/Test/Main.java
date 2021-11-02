@@ -3,6 +3,8 @@ package Test;
 import Persona.Persona;
 import Profesor.Profesor;
 import Funcionalidades.FuncionPrograma;
+
+import java.io.File;
 //______________________ Importación de Paquetes java __________________________________
 import java.util.Scanner;
 
@@ -27,6 +29,7 @@ public class Main
         Estudiante alumno = null;
         Profesor maestro = null;
         Administrador admin = null;
+        File manejoArchivos = null;
         // ______________________ Desarrollo general ___________________________________
         do
         {
@@ -44,7 +47,7 @@ public class Main
                         usuario = inp.next();
                         System.out.println("\tDigite su contraseña: ");
                         password = inp.next();
-                        colaborador = Persona.leerEnArchivo(planilla, usuario,password);
+                        colaborador = Persona.leerEnArchivo(planilla, usuario, password);
                         if(colaborador == null)
                         {
                             System.out.println("Volviendo al menu por fallo de login...");
@@ -77,6 +80,9 @@ public class Main
                                     do
                                     {
                                         //TODO: Opciones de menuAd:
+                                        //switch()
+                                        //crear usuario... llamado a metodo de administrador
+                                        //crear a clase... llamado a método en administrador
                                     }while(opt2!=5);
                                     break;
                                 case 2:
