@@ -1,7 +1,8 @@
-/*
+
 package Asignaturas;
 import java.io.FileOutputStream;
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,53 +13,60 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Scanner;
 
+import Estudiante.Estudiante;
+import Persona.Persona;
+
 public class Asignatura implements Serializable
 {
-    protected String Nombre;
-
-    protected String Profesor;
-    protected int Horario;
-    protected int Creditos;
-
-    public Asignatura(String Nombre, String Profesor, int Horario, int Creditos)
+    protected String nombre;
+    protected String profesor;
+    protected int creditos;
+    public static final int MS = 15;
+    protected Estudiante [] alumnos = new Estudiante [MS];
+    public Asignatura(String Nombre, String Profesor, int Creditos)
     {
-        this.Nombre = Nombre;
-        this.Profesor = Profesor;
-        this.Horario = Horario;
-        this.Creditos = Creditos;
+        this.nombre = Nombre;
+        this.profesor = Profesor;
+        this.creditos = Creditos;
     }
-    public String getNombre() {
-        return Nombre;
+    public void setEstudiantes(int pos, Estudiante siguiente)
+    {
+        this.alumnos[pos] = siguiente;
+        return;
     }
-
-    public void setNombre(String nombre) {
-        Nombre = nombre;
-    }
-
-    public String getProfesor() {
-        return Profesor;
+    public String getNombre() 
+    {
+        return nombre;
     }
 
-    public void setProfesor(String profesor) {
-        Profesor = profesor;
+    public void setNombre(String nombre) 
+    {
+        this.nombre = nombre;
+        return;
     }
 
-    public int getHorario() {
-        return Horario;
+    public String getProfesor() 
+    {
+        return profesor;
     }
 
-    public void setHorario(int horario) {
-        Horario = horario;
+    public void setProfesor(String profesor) 
+    {
+        this.profesor = profesor;
+        return;
     }
 
-    public int getCreditos() {
-        return Creditos;
+    public int getCreditos() 
+    {
+        return creditos;
     }
 
-    public void setCreditos(int creditos) {
-        Creditos = creditos;
+    public void setCreditos(int creditos) 
+    {
+        this.creditos = creditos;
+        return;
     }
-    public static Asignatura leerArchivo (String archivo, String Profesor,  )
+    public static Asignatura leerArchivo (String archivo, String Profesor)
     {
         boolean bandera = true;
         int con = 0;
@@ -73,10 +81,10 @@ public class Asignatura implements Serializable
             while(bandera)
             {
                 adquirido = (Persona)oos.readObject();
-                if( adquirido.getUsuario().equals(usuario))
+                if(true)
                 {
                     oos.close();
-                    while(con<3)
+                    /*while(con<3)
                     {
                         if(adquirido.getContrasena().equals(contrasena))
                         {
@@ -86,11 +94,11 @@ public class Asignatura implements Serializable
                         System.out.println("Contraseña incorrecta...\nDigite nuevamente: ");
                         contrasena = inp.next();
                         con++;
-                    }
+                    }*/
                     inp.close();
                     if(bandera)
                     {
-                        return adquirido;
+                        return null;
                     }
                     else
                     {
@@ -125,16 +133,15 @@ public class Asignatura implements Serializable
         {
             System.out.println("Lectura finalizada");
         }
-        return adquirido;
+        return null;
     }
-    @Override
-    public String toString() 
+    public void guardarClaseArchivo(String listado, Asignatura tuClase) throws IOException
     {
-        String cadena = "";
-        cadena = "Usuario: " + this.usuario + "\nContraseña: " + this.contrasena;
-        cadena += "\nCreacion: " + this.creacion + "\nTipo: " + this.tipo;
-        return cadena;
+        File flujo = new File(listado);
+        FileOutputStream fos = new FileOutputStream(flujo, true);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(tuClase);
+        oos.close();
+        return;
     }
-        
 }
-*/
