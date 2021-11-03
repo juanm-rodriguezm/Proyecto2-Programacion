@@ -43,63 +43,71 @@ public class Persona implements Serializable
         this.creacion = creacion;
         this.tipo = tipo;
     }
-     public String getUsuario() {
+    public String getUsuario() {
         return usuario;
     }
     /**
      * Set para fijar el nombre del usuario
      * @param usuario
      */
-    public void setUsuario(String usuario) {
+    public void setUsuario(String usuario) 
+    {
         this.usuario = usuario;
     }
     /**
      * Obtener el nombre del usuario
      * @return contrasena
      */
-    public String getContrasena() {
+    public String getContrasena() 
+    {
         return contrasena;
     }
     /**
      * Set para modificar las contraseñas del usuario
      * @param contrasena
      */
-    public void setContrasena(String contrasena) {
+    public void setContrasena(String contrasena) 
+    {
         this.contrasena = contrasena;
     }
     /**
      * Obtener la edad del usuario
      * @return
      */
-    public int getEdad() {
+    public int getEdad() 
+    {
         return edad;
     }
     /**
      * Set para modificar la edad del usuario
      * @param edad
      */
-    public void setEdad(int edad) {
+    public void setEdad(int edad) 
+    {
         this.edad = edad;
     }
     /**
      * Obtener la fecha cuando fue creada la cuenta del usuario
      * @return
      */
-    public Date getCreacion() {
+    public Date getCreacion() 
+    {
         return creacion;
     }
     /**
      * Set para modificar la fecha de cracion de la cuenta del usuario
      * @param creacion
      */
-    public void setCreacion(Date creacion) {
+    public void setCreacion(Date creacion) 
+    {
         this.creacion = creacion;
     }
     /**
      * Obtener el tipo de cuenta del usuario
      * @return 
      */
-    public char getTipo() {
+    public char getTipo() 
+    {
         return tipo;
     }
     /**
@@ -199,20 +207,24 @@ public class Persona implements Serializable
                     {
                         if(adquirido.getContrasena().equals(contrasena))
                         {
-                            bandera = !bandera;
+                            System.out.println("Conseguido:...");
+                            bandera = true;
                             break;
                         }
                         System.out.println("Contraseña incorrecta...\nDigite nuevamente: ");
                         contrasena = inp.next();
+                        bandera = false;
                         con++;
                     }
                     inp.close();
                     if(bandera)
                     {
+                        System.out.println("Contraseña es correcta...");
                         return adquirido;
                     }
                     else
                     {
+                        System.out.println("Fallo en la validación...");
                         return null;
                     }
                     

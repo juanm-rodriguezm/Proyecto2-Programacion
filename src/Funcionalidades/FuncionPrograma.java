@@ -1,7 +1,6 @@
 package Funcionalidades;
-
+//_________________________Importaciones de Java_____________________________
 import java.io.File;
-import java.io.IOError;
 import java.io.IOException;
 import java.util.Date;
 import Persona.Persona;
@@ -31,7 +30,7 @@ public class FuncionPrograma
         if(!nuevo.exists())
         {
             Date creacion = new Date();
-            Persona admin = new Persona("master",30,creacion,"master");
+            Persona admin = new Persona("master",30,creacion,"master",'a');
             if(nuevo.createNewFile())
             {
                 Persona.guardadoEnArchivo(plantilla, admin);

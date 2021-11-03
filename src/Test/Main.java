@@ -3,23 +3,23 @@ package Test;
 import Persona.Persona;
 import Profesor.Profesor;
 import Funcionalidades.FuncionPrograma;
+import Administrador.Administrador;
+import Estudiante.Estudiante;
 
-import java.io.File;
 //______________________ Importación de Paquetes java __________________________________
 import java.util.Scanner;
 
-import javax.lang.model.util.ElementScanner14;
+import org.w3c.dom.css.Counter;
 
-import Administrador.Administrador;
-import Estudiante.Estudiante;
-//import java.util.Date;
+import java.io.File;
+import java.util.Date;
 public class Main 
 {
     //_______________________________DESARROLLO DEL MAIN________________________________
     public static void main(String[] args)
     {
         //_______________________ Declaración de variables _____________________________
-        int opt = 0, opt2 = 0, ntipo = 0;
+        int opt = 0, opt2 = 0,opt3 = 0, ntipo = 0, edad = 0;
         String usuario = " ", password = " ";
         String planilla = "planillaU.obj";  //Nombre del listado de personas
         char tipo = ' ';
@@ -30,6 +30,7 @@ public class Main
         Profesor maestro = null;
         Administrador admin = null;
         File manejoArchivos = null;
+        Date creacion = null;
         // ______________________ Desarrollo general ___________________________________
         do
         {
@@ -43,7 +44,7 @@ public class Main
                 {
                     case 1:
                         System.out.println("Preparando ingreso de sesión...");
-                        System.out.println("\n\tDigite su usuario");
+                        System.out.println("\n\tDigite su usuario: ");
                         usuario = inp.next();
                         System.out.println("\tDigite su contraseña: ");
                         password = inp.next();
@@ -56,6 +57,7 @@ public class Main
                         {
                             //-------Lectura del tipo de cuenta y claseficación---------------
                             tipo = colaborador.getTipo();
+                            System.out.println("Tipo: " + tipo);
                             if(tipo == 'a')
                             {
                                 ntipo = 1;
@@ -77,12 +79,38 @@ public class Main
                             {
                                 case 1:
                                     Administrador.Menu();
+                                    usuario = colaborador.getUsuario();
+                                    edad = colaborador.getEdad();
+                                    creacion = colaborador.getCreacion();
+                                    password = colaborador.getContrasena();
+                                    admin = new Administrador(usuario, edad, creacion, password);
                                     do
                                     {
-                                        //TODO: Opciones de menuAd:
-                                        //switch()
-                                        //crear usuario... llamado a metodo de administrador
-                                        //crear a clase... llamado a método en administrador
+                                        System.out.println("Digite su opcion admin: ");
+                                        usuario = inp.nextLine();
+                                        opt3 = inp.nextInt();
+                                        switch(opt3)
+                                        {
+                                            case 1:
+                                                System.out.println("Cargando instrucciones para crear cuenta....");    
+                                                admin.crearCuenta(planilla);
+                                                break;
+                                            case 2:
+                                                System.out.println("Cargando y preparando la creación de clase....");
+                                                break;
+                                            case 3:
+                                                System.out.println("Cargando clases existentes....");
+                                                break;
+                                            case 4:
+                                                System.out.println("Buscando clases existentas para modificar...");
+                                                break;
+                                            case 5:
+                                                System.out.println("Volviendo al menú general del programa....");
+                                                break;
+                                            default:
+                                                System.out.println("Volviendo a desplegar menú del admin...");
+                                                break;
+                                        }
                                     }while(opt2!=5);
                                     break;
                                 case 2:
@@ -127,6 +155,7 @@ public class Main
             {
                 System.out.println("Finally");
             }
+            opt = 3;
         }while(opt!=3);
         System.out.println("Sali del programa");
         inp.close();

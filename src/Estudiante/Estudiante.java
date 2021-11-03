@@ -35,8 +35,7 @@ public class Estudiante extends Persona
         System.out.println("| 3) Buzón de mensajería              |");
         System.out.println("| 4) Inscribir un curso               |");
         System.out.println("| 5) Cancelar un curso                |");
-        System.out.println("| 6) Listar cursos                    |");
-        System.out.println("| 7) Salir                            |");
+        System.out.println("| 6) Salir                            |");
         System.out.println("+-------------------------------------+");
         return;
     }
