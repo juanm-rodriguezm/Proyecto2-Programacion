@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 //--------------------importaciones y librerías------------------
-import java.util.Date;
+
 import java.util.Scanner;
 
 import Estudiante.Estudiante;
@@ -23,49 +23,85 @@ public class Asignatura implements Serializable
     protected int creditos;
     public static final int MS = 15;
     protected Estudiante [] alumnos = new Estudiante [MS];
+    /**
+     * Constructor de asignatura con los siguientes parámetros:
+     * @param Nombre
+     * @param Profesor
+     * @param Creditos
+     */
     public Asignatura(String Nombre, String Profesor, int Creditos)
     {
         this.nombre = Nombre;
         this.profesor = Profesor;
         this.creditos = Creditos;
     }
+    /**
+     * setter de estudiantes por posición
+     * @param pos
+     * @param siguiente
+     */
     public void setEstudiantes(int pos, Estudiante siguiente)
     {
         this.alumnos[pos] = siguiente;
         return;
     }
+    /**
+     * Getter del nombre
+     * @return
+     */
     public String getNombre() 
     {
         return nombre;
     }
-
+    /**
+     * Setter del nombre
+     * @param nombre
+     */
     public void setNombre(String nombre) 
     {
         this.nombre = nombre;
         return;
     }
-
+    /**
+     * Getter del profesor
+     * @return
+     */
     public String getProfesor() 
     {
         return profesor;
     }
-
+    /**
+     * Setter del profesor
+     * @param profesor
+     */
     public void setProfesor(String profesor) 
     {
         this.profesor = profesor;
         return;
     }
-
+    /**
+     * Getter del numero de créditos
+     * @return
+     */
     public int getCreditos() 
     {
         return creditos;
     }
-
+    /**
+     * Setter de créditos
+     * @param creditos
+     */
     public void setCreditos(int creditos) 
     {
         this.creditos = creditos;
         return;
     }
+    /**
+     * Leer un asignatura del archivo de materias disponibles
+     * @param archivo
+     * @param Profesor
+     * @return
+     */
     public static Asignatura leerArchivo (String archivo, String Profesor)
     {
         boolean bandera = true;
@@ -107,6 +143,8 @@ public class Asignatura implements Serializable
                     
                 }
             }
+            System.out.println(con);
+            System.out.println(adquirido);
             oos.close();
         }
         catch (EOFException eof) //Excepción de lectura completa de archivo
@@ -135,6 +173,12 @@ public class Asignatura implements Serializable
         }
         return null;
     }
+    /**
+     * Guardar una asignatura en un archivo de clases
+     * @param listado
+     * @param tuClase
+     * @throws IOException
+     */
     public void guardarClaseArchivo(String listado, Asignatura tuClase) throws IOException
     {
         File flujo = new File(listado);

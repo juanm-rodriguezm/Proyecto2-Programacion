@@ -3,6 +3,8 @@ package Funcionalidades;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Scanner;
+
 import Persona.Persona;
 
 public class FuncionPrograma 
@@ -37,5 +39,18 @@ public class FuncionPrograma
             }
         }
         return;
+    }
+    /**
+     * Metodo para leer una opcion con un menú dado previamente
+     * @return opcion numérica
+     */
+    public static int leerOpcion()
+    {
+        int opt = 0;
+        Scanner entrada = new Scanner(System.in);
+        System.out.println("Digite su opción: ");
+        opt = entrada.nextInt();
+        entrada.close();
+        return opt;
     }
 }

@@ -17,7 +17,7 @@ public class Estudiante extends Persona
      * @param creacion
      * @param carrera
      */
-    public Estudiante(String usuario, int edad, Date creacion, String carrera, int semestre, String contrasena)
+    public Estudiante(String usuario, int edad, Date creacion, String contrasena)
     {
         super(usuario, edad, creacion, contrasena);
         super.tipo = 'e';
