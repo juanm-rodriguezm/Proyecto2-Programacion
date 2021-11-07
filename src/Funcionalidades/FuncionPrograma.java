@@ -49,6 +49,7 @@ public class FuncionPrograma
         int opt = 0;
         Scanner entrada = new Scanner(System.in);
         System.out.println("Digite su opción: ");
+        entrada.nextLine();
         opt = entrada.nextInt();
         entrada.close();
         return opt;

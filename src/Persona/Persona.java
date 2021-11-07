@@ -144,7 +144,7 @@ public class Persona implements Serializable
             while(bandera)
             {
                 adquirido = (Persona)oos.readObject();
-                if( adquirido.getUsuario() == usuario )
+                if( adquirido.getUsuario().equals(usuario) )
                 {
                     oos.close();
                     return adquirido;

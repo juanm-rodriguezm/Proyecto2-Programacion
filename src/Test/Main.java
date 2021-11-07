@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.lang.Exception;
 //import java.io.File;
 import java.io.IOException;
+
 import java.util.Date;
 public class Main 
 {
@@ -22,7 +23,7 @@ public class Main
         String planilla = "planillaU.obj";  //Nombre del listado de personas
         char tipo = ' ';
         //_______________________ Declaración de objetos _______________________________
-        Scanner inp = null;
+        Scanner inp = new Scanner(System.in);
         Persona colaborador = null;
         Estudiante alumno = null;
         Profesor maestro = null;
@@ -32,7 +33,6 @@ public class Main
         // ______________________ Desarrollo general ___________________________________
         do
         {
-            
             try
             {
                 inp = new Scanner(System.in);
@@ -88,7 +88,8 @@ public class Main
                                     do
                                     {
                                         System.out.println("Digite su opcion admin: ");
-                                        opt2 = FuncionPrograma.leerOpcion();
+                                        opt2 = inp.nextInt();
+                                        inp.nextLine();
                                         switch(opt2)
                                         {
                                             case 1:
@@ -205,26 +206,25 @@ public class Main
             catch(IOException io)
             {
                 System.out.println("Ha ocurrido un problema con el flujo del archivo:\n" + io.getMessage());
-                System.out.println(io.getStackTrace());    
             }
             catch(ClassNotFoundException cnfe)
             {
                 System.out.println("Verifique que está ejecutando el problema, junto a los paqueetes requridos:");
                 System.out.println(cnfe.getMessage());
             }
-            catch(Exception exp)
-            {
-                System.out.println("Error " + exp.getMessage());
-                System.out.println(exp.getStackTrace());
-            }
+            //catch(Exception exp)
+            //{
+            //    System.out.println("Error " + exp.getMessage());
+            //    System.out.println(exp.getStackTrace());
+            //}
             finally
             {
                 System.out.println("Finally");
-                inp.close();
+                
                 opt = 3;
             }
         } while(opt!=3);
+        inp.close();
         System.out.println("Sali del programa");
-        
     }
 }

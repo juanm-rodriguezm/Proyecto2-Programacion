@@ -120,22 +120,35 @@ public class Administrador extends Persona
      * @param cantidadestudiantes
      * @param archivo
      */
-    public void CrearUnaAsignatura(Profesor profe, Estudiante[] estudiante, int cantidadestudiantes,String archivo){
+    /*public void CrearUnaAsignatura(String ListaAsignaturas,String planilla){
         Persona persona=null,perso;
         String NombreProfe = " ",NombreAsignatura = " ";
         Scanner inp = new Scanner(System.in);
         int creditos;
-        System.out.println("Ingrese el nombre de la asignatura a crear ");
-        NombreAsignatura=inp.next();
-        if(Persona.leerEnArchivo(archivo,profe.getUsuario())!=null)
+        System.out.println("Ingrese el nombre del profesor que dara la asiganatura: ");
+        NombreProfe=inp.nextLine();
+
+        do
         {
-            perso=Persona.leerEnArchivo(archivo, profe.getUsuario());
-            if(perso.getTipo()=='p')
+            
+            if(NombreProfe==)
+        }while();
+
+        do{
+            if(Persona.leerEnArchivo(archivo,profe.getUsuario())!=null)
             {
-                System.out.println("el usuario esta autorizado para impartir la asignatura ");
-                NombreProfe=perso.getUsuario();
+                perso=Persona.leerEnArchivo(archivo, profe.getUsuario());
+                if(perso.getTipo()=='p')
+                {
+                    System.out.println("el usuario esta autorizado para impartir la asignatura ");
+                    NombreProfe=perso.getUsuario();
+                }
             }
-        }
+            else
+            {
+                System.out.println("el profesor no existe: ");
+            }
+        }while(Persona.leerEnArchivo(archivo,profe.getUsuario())==null);
         System.out.println("Ingrese la cantidad de creditos de la asignatura ");
         creditos=inp.nextInt();
         //funcion para ingresar las asignaturas que recibe nombre profesor, nombre asignatura y cantidad de creditos
@@ -144,5 +157,5 @@ public class Administrador extends Persona
         System.out.println(NombreAsignatura);
         System.out.println(NombreProfe);
         inp.close();
-    }
+    }*/
 }

@@ -1,5 +1,6 @@
 
 package Asignaturas;
+
 import java.io.FileOutputStream;
 import java.io.EOFException;
 import java.io.File;
@@ -12,7 +13,6 @@ import java.io.Serializable;
 //--------------------importaciones y librerías------------------
 
 import java.util.Scanner;
-
 import Estudiante.Estudiante;
 import Persona.Persona;
 
@@ -102,13 +102,14 @@ public class Asignatura implements Serializable
      * @param Profesor
      * @return
      */
+
     public static Asignatura leerArchivo (String archivo, String Profesor)
     {
         boolean bandera = true;
         int con = 0;
         Scanner inp = new Scanner(System.in);
         Persona adquirido = null;
-        FileInputStream fos = null; 
+        FileInputStream fos = null;
         ObjectInputStream oos = null;
         try
         {
