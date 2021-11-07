@@ -5,7 +5,10 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.io.IOException;
+import java.io.EOFException;
 import java.io.ObjectOutputStream;
 //_________________________ IMPORTACIÓN DE PAQUETES PROPIOS___________________________________
 import Estudiante.Estudiante;
@@ -120,42 +123,90 @@ public class Administrador extends Persona
      * @param cantidadestudiantes
      * @param archivo
      */
-    /*public void CrearUnaAsignatura(String ListaAsignaturas,String planilla){
-        Persona persona=null,perso;
-        String NombreProfe = " ",NombreAsignatura = " ";
-        Scanner inp = new Scanner(System.in);
-        int creditos;
-        System.out.println("Ingrese el nombre del profesor que dara la asiganatura: ");
-        NombreProfe=inp.nextLine();
-
-        do
+    public void CrearUnaAsignatura(String ListaAsignaturas, String planilla)
+    {
         {
-            
-            if(NombreProfe==)
-        }while();
-
-        do{
-            if(Persona.leerEnArchivo(archivo,profe.getUsuario())!=null)
+            boolean bandera = true;
+            int con = 0;
+            Scanner in = new Scanner(System.in);
+            Persona adquirido = null;
+            FileInputStream asg = null; 
+            ObjectInputStream ng = null;
+            String nombreAsignatura={" "};
+            int CantiCredi;
+            char tip ='p';
+            System.out.println("Digite el nombre del profesor ");
+            String comprobar= in.nextLine();
+            try
             {
-                perso=Persona.leerEnArchivo(archivo, profe.getUsuario());
-                if(perso.getTipo()=='p')
+                asg = new FileInputStream(planilla);
+                ng = new ObjectInputStream(asg);
+                while(bandera)
                 {
-                    System.out.println("el usuario esta autorizado para impartir la asignatura ");
-                    NombreProfe=perso.getUsuario();
+                    adquirido = (Persona)ng.readObject();
+                    if(adquirido.getTipo().equals(tipo))
+                    {
+                        ng.close();
+                        for(int i=0;i<planilla.length(); i++)
+                        {
+                            if(adquirido.getUsuario().equals(comprobar))
+                            {
+                                System.out.println("Conseguido:...");
+                                bandera = true;
+                                break;
+                            }
+                            System.out.println("Nombre no encontrado...\nDigite nuevamente: ");
+                            comprobar = in.nextLine();
+                            bandera = false;
+                            i++;
+                        }
+                        ng.close();
+                        if(bandera)
+                        {
+                            System.out.println("Profesor es Valido...");
+                            System.out.println("Ingrese Nombre de la asignatura ");
+                            nombreAsignatura=in.nextLine();
+                            System.out.println("Ingrese la cantidad de creditos de la asignatura ");
+                            CantiCredi=in.nextInt();
+                            Asignatura asignatura= new Asignatura(nombreAsignatura,comprobar,CantiCredi);
+                            Fiis = new FileInputStream(ListaAsignaturas);
+                            Oiis = new ObjectInputStream(Fiis);
+                            Oiis.writeObject(asignatura);    
+                            Oiis.close();
+                        }
+                        else
+                        {
+                            System.out.println("Fallo en la validación, no existe el profesor...");
+                            return null;
+                        }   
+                    }
                 }
+                ng.close();
             }
-            else
+            catch (EOFException eof) //Excepción de lectura completa de archivo
             {
-                System.out.println("el profesor no existe: ");
+                System.out.println("Se ha finalizado la lectura del archivo");
             }
-        }while(Persona.leerEnArchivo(archivo,profe.getUsuario())==null);
-        System.out.println("Ingrese la cantidad de creditos de la asignatura ");
-        creditos=inp.nextInt();
-        //funcion para ingresar las asignaturas que recibe nombre profesor, nombre asignatura y cantidad de creditos
-        System.out.println(creditos);
-        System.out.println(persona);
-        System.out.println(NombreAsignatura);
-        System.out.println(NombreProfe);
-        inp.close();
-    }*/
+            catch (ClassNotFoundException cnfe)  //Error en caso de clase inexistente o no encontrada
+            {
+                System.out.println("Ha ocurrido un problema con la definición de la clase");
+            }
+            catch (FileNotFoundException fnfe)  //Error con el archivo en ruta especificada
+            {
+                System.out.println("No se ha encontrado el archivo.");
+            }
+            catch (IOException io)  //Error con el flujo de entrada y salida
+            {
+                System.out.println("Error en el flujo del sistema");
+            }
+            catch (Exception e)  //Manejo de otras excepciones
+            {
+                System.out.println("Ha ocurrido una imprevisto: " + e.getMessage());
+            }
+            finally
+            {
+                System.out.println("Lectura finalizada");
+            }
+            return adquirido;
+        }
 }
